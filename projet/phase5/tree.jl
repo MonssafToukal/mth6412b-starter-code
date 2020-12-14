@@ -61,3 +61,21 @@ function dfs(tree::Tree, preorder::Vector{String})
     push!(preorder, data(tree))
     [dfs(child, preorder) for child in tree.children if !isnothing(tree.children)]
 end
+
+"""implements depth-first-search algorithm recursively for 1-tree"""
+function dfs_1tree(tree::Tree)
+    preorder = Vector{String}()
+    push!(preorder, data(tree))
+    # Go through the children first:
+    [dfs(child, preorder) for child in tree.children if !isnothing(tree.children)] 
+   return preorder
+    
+end
+
+""" depth-first-search algorithm for 1-tree with different signature to combine result in one vector"""
+function dfs_1tree(tree::Tree, preorder::Vector{String})
+    if isnothing(findfirst(e -> e == data(tree), preorder))
+        push!(preorder, data(tree))
+        [dfs(child, preorder) for child in tree.children if !isnothing(tree.children)]
+    end
+end
